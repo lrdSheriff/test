@@ -1,0 +1,59 @@
+package com.github.sharifullin.steps;
+
+import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.yandex.qatools.allure.annotations.Step;
+
+/**
+ * This class contains Allure steps for reporting.
+ */
+public final class AllureSteps {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AllureSteps.class);
+    private static final String ACTUAL_RESULT = "Actual result: ";
+
+    private AllureSteps() {
+    }
+
+    @Step
+    public static void addTest(final String operand1, final String operand2, final String result) {
+        LOGGER.info(String.format("Testing: %s + %s = %s", operand1, operand2, result));
+        final int expectedResult = Integer.parseInt(result);
+        final int actualResult = Integer.parseInt(operand1) + Integer.parseInt(operand2);
+        LOGGER.info(ACTUAL_RESULT + actualResult);
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Step
+    public static void subtractTest(final String operand1, final String operand2, final String result) {
+        LOGGER.info(String.format("Testing: %s - %s = %s", operand1, operand2, result));
+        final int expectedResult = Integer.parseInt(result);
+        final int actualResult = Integer.parseInt(operand1) - Integer.parseInt(operand2);
+        LOGGER.info(ACTUAL_RESULT + actualResult);
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Step
+    public static void multiplyingTest(final String operand1, final String operand2, final String result) {
+        LOGGER.info(String.format("Testing: %s * %s = %s", operand1, operand2, result));
+        final int expectedResult = Integer.parseInt(result);
+        final int actualResult = Integer.parseInt(operand1) * Integer.parseInt(operand2);
+        LOGGER.info(ACTUAL_RESULT + actualResult);
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Step
+    public static void divisionTest(final String operand1, final String operand2, final String result) {
+        if (operand2.equals(0)){
+            LOGGER.info("Divide by zero exception caught");
+        }
+        else{
+            LOGGER.info(String.format("Testing: %s / %s = %s", operand1, operand2, result));
+            final int expectedResult = Integer.parseInt(result);
+            final int actualResult = Integer.parseInt(operand1) / Integer.parseInt(operand2);
+            LOGGER.info(ACTUAL_RESULT + actualResult);
+            Assert.assertEquals(expectedResult, actualResult);            
+        }
+    }
+}
